@@ -10,18 +10,41 @@ import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import * as strings from 'PracticeProjectWebPartStrings';
 import PracticeProject from './components/PracticeProject';
 import { IPracticeProjectProps } from './components/IPracticeProjectProps';
+import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
+import { sp, Web, IListEnsureResult, IFieldAddResult, IFieldUpdateResult, IFieldCreationProperties, IItemAddResult } from "@pnp/sp/presets/all";
 
 export interface IPracticeProjectWebPartProps {
-  description: string;
+  title: string;
+  list: string;
+  loading: boolean;
+  // taskName: string;
+  // taskDescription: string;
+  // taskStakeholder: string;
+  // taskDueDate: string;
 }
 
 export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPracticeProjectWebPartProps> {
+
+  public onInit(): Promise<void> {
+    this.properties.loading = false;
+ 
+    return super.onInit();
+  }
+
 
   public render(): void {
     const element: React.ReactElement<IPracticeProjectProps> = React.createElement(
       PracticeProject,
       {
-        description: this.properties.description
+        webUrl: this.context.pageContext.web.absoluteUrl,
+        spHttpClient: this.context.spHttpClient,
+        title: this.properties.title,
+        list: this.properties.list,
+        displayMode: this.displayMode,
+        onTitleUpdate: (newTitle: string) => {
+          this.properties.title= newTitle;
+        },
+        context: this.context
       }
     );
 
@@ -38,6 +61,7 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
+      showLoadingIndicator: this.properties.loading,
       pages: [
         {
           header: {
@@ -47,8 +71,18 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
             {
               groupName: strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('description', {
-                  label: strings.DescriptionFieldLabel
+                PropertyFieldListPicker('list', {
+                  label: "Select todo list",
+                  selectedList: this.properties.list,
+                  includeHidden: false,
+                  orderBy: PropertyFieldListPickerOrderBy.Title,
+                  disabled: false,
+                  onPropertyChange: this.onPropertyPaneFieldChanged.bind(this),
+                  properties: this.properties,
+                  context: this.context,
+                  onGetErrorMessage: null,
+                  deferredValidationTime: 0,
+                  key: 'listPickerFieldId'
                 })
               ]
             }
