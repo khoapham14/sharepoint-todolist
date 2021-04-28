@@ -12,6 +12,8 @@ import PracticeProject from './components/PracticeProject';
 import { IPracticeProjectProps } from './components/IPracticeProjectProps';
 import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 import { sp, Web, IListEnsureResult, IFieldAddResult, IFieldUpdateResult, IFieldCreationProperties, IItemAddResult } from "@pnp/sp/presets/all";
+import { ToDoListProvider } from './ToDoListContext';
+
 
 export interface IPracticeProjectWebPartProps {
   title: string;
@@ -22,6 +24,7 @@ export interface IPracticeProjectWebPartProps {
   // taskStakeholder: string;
   // taskDueDate: string;
 }
+
 
 export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPracticeProjectWebPartProps> {
 
@@ -35,6 +38,7 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
   public render(): void {
     const element: React.ReactElement<IPracticeProjectProps> = React.createElement(
       PracticeProject,
+     
       {
         webUrl: this.context.pageContext.web.absoluteUrl,
         spHttpClient: this.context.spHttpClient,
@@ -46,9 +50,13 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
         },
         context: this.context
       }
+    
     );
-
-    ReactDom.render(element, this.domElement);
+    ReactDom.render(
+      <ToDoListProvider>
+        {element}
+      </ToDoListProvider>
+    , this.domElement);
   }
 
   protected onDispose(): void {

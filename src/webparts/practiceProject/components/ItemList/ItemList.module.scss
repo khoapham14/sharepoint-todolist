@@ -1,0 +1,43 @@
+@import '~office-ui-fabric-react/dist/sass/References.scss';
+
+.flexContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    text-align: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.pageHeader {
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+}
+
+.title{
+    flex: 2;
+    padding: 5px;
+}
+
+.description{
+    flex: 5;
+    padding: 5px;
+    background-color: lightblue;
+}
+
+.priority{
+    flex: 2;
+    padding: 5px;
+}
+
+.dueDate{
+    flex: 2;
+    padding: 5px;
+    background-color: lightblue;
+}
+
+.buttonContainer{
+    flex: 3;
+    padding: 5px;
+}

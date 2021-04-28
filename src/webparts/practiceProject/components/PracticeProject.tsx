@@ -2,14 +2,12 @@ import * as React from 'react';
 import styles from './PracticeProject.module.scss';
 import { IPracticeProjectProps } from './IPracticeProjectProps';
 import { Placeholder } from '@pnp/spfx-controls-react/lib/Placeholder';
-import { DetailsList, IColumn } from "@fluentui/react";
-import { sp, Web } from '@pnp/sp/presets/all';
+import store from '../ToDoListStore';
+import ItemList  from '../components/ItemList/ItemList';
 
 
 interface IPracticeProjectState{
-  list: any,
   showPlaceholder: boolean,
-  columns: IColumn[];
 }
 
 
@@ -18,55 +16,15 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
     super(props);
 
     this.state={
-      list: [],
       showPlaceholder: true,
-      columns: [ 
-        {
-          key: 'Title',
-          name: 'Title',
-          fieldName: 'Title',
-          minWidth: 50,
-          maxWidth: 250
-        },
-        {
-          key: 'Description',
-          name: 'Description',
-          fieldName: 'Description',
-          minWidth: 50,
-          maxWidth: 250
-        },
-        {
-          key: 'Priority',
-          name: 'Priority',
-          fieldName: 'Priority',
-          minWidth: 50,
-          maxWidth: 250
-        },
-        {
-          key: 'DueDate',
-          name: 'DueDate',
-          fieldName: 'DueDate',
-          minWidth: 50,
-          maxWidth: 250
-        }
-      ]
     }
   }
+
   
   private getListData() : void {
-    let spWeb = Web(this.props.webUrl);
-
-    spWeb.lists.getById(this.props.list).items.select("Title", "Description", "Priority", "DueDate").get().then((results : any[]) => {
-      if(results !== null){
-        console.log(results);
-        this.setState({
-          list: results,
-          showPlaceholder: false,
-        })
-      }
-      else{
-        alert("Failed to retrieve list data. Make sure you have created and selected a ToDo List!");
-      }
+   store.getListData(this.props.list, this.props.webUrl)
+    this.setState({
+      showPlaceholder: false
     })
   }
 
@@ -105,18 +63,16 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
       return (
         <Placeholder
           iconName="Edit"
-          iconText="To do list configuration"
+          iconText="Configuration"
           description="Please configure the web part to show a todo list."
           buttonLabel="Configure"
           onConfigure={this._configureWebPart.bind(this)} />
       );
     }
     else{
-      return (
-        <div className={ styles.practiceProject }>
-         <DetailsList items={this.state.list} columns={this.state.columns} /> 
-        </div>
-      );
+      return(   
+         <ItemList />
+    );
     }
   }
 }
