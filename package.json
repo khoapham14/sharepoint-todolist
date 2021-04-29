@@ -24,13 +24,18 @@
     "@pnp/sp": "^2.4.0",
     "@pnp/spfx-controls-react": "^3.0.0",
     "@pnp/spfx-property-controls": "^3.0.0",
+    "@storybook/preset-scss": "^1.0.3",
     "camljs": "^2.12.0",
     "cors": "^2.8.5",
+    "css-loader": "^5.2.4",
     "mobx": "^5.10.1",
     "mobx-react-lite": "^2.0.0",
     "office-ui-fabric-react": "6.214.0",
     "react": "16.8.5",
-    "react-dom": "16.8.5"
+    "react-dom": "16.8.5",
+    "sass": "^1.32.12",
+    "style-loader": "^2.0.0",
+    "webpack": "^4.44.2"
   },
   "devDependencies": {
     "@babel/core": "^7.13.16",
@@ -51,6 +56,7 @@
     "@types/webpack-env": "1.13.1",
     "ajv": "~5.2.2",
     "babel-loader": "^8.2.2",
-    "gulp": "~3.9.1"
+    "gulp": "~3.9.1",
+    "sass-loader": "^10.1.1"
   }
 }

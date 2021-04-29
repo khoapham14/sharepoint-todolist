@@ -71,7 +71,7 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
     }
     else{
       return(   
-         <ItemList />
+         <ItemList listID={this.props.list} webUrl={this.props.webUrl}/>
     );
     }
   }

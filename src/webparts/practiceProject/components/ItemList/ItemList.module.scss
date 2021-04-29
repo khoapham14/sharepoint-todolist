@@ -1,43 +1,138 @@
-@import '~office-ui-fabric-react/dist/sass/References.scss';
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+
+$lightTheme: rgb(221, 221, 221);
+
+@mixin titleColumn {
+  display: flex;
+  flex: 2;
+  padding: 5px;
+  flex-flow: column nowrap;
+  border-bottom: 1px solid black;
+  @media only screen and (max-width: 700px) {
+    padding: none;
+    border: none;
+    margin: 0px;
+  }
+}
+
+@mixin descColumn {
+  display: flex;
+  flex: 6;
+  flex-flow: column nowrap;
+  padding: 5px;
+  background-color: $lightTheme;
+  border-bottom: 1px solid black;
+  @media only screen and (max-width: 700px) {
+    padding: none;
+    border: none;
+    margin: 0px;
+  }
+}
+
+@mixin prioColumn{
+  display: flex;
+  flex: 2;
+  flex-flow: column nowrap;
+  padding: 5px;
+  border-bottom: 1px solid black;
+  @media only screen and (max-width: 700px) {
+    padding: none;
+    border: none;
+    margin: 0px;
+  }
+}
+
+@mixin dueColumn{
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 2;
+  padding: 5px;
+  background-color: $lightTheme;
+  border-bottom: 1px solid black;
+  @media only screen and (max-width: 700px) {
+    padding: none;
+    border: none;
+    margin: 0px;
+  }
+}
+
+@mixin actionColumn {
+  display: flex;
+  flex-flow: column nowrap;
+  flex: 2;
+  padding: 5px;
+  border-bottom: 1px solid black;
+  @media only screen and (max-width: 700px) {
+    padding: none;
+    border: none;
+    margin: 0px;
+  }
+}
+
+@mixin columnHeader{
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid black;
+}
 
 .flexContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
-    text-align: center;
-    justify-content: center;
-    width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  text-align: left;
+  justify-content: center;
+  width: 100%;
 }
 
 .pageHeader {
-    font-size: 2em;
-    font-weight: bold;
-    text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
 }
 
-.title{
-    flex: 2;
-    padding: 5px;
+.titleHeader {
+  @include titleColumn();
+  @include columnHeader();
 }
 
-.description{
-    flex: 5;
-    padding: 5px;
-    background-color: lightblue;
+.title {
+  @include titleColumn();
 }
 
-.priority{
-    flex: 2;
-    padding: 5px;
+.descriptionHeader{
+  @include descColumn();
+  @include columnHeader();
 }
 
-.dueDate{
-    flex: 2;
-    padding: 5px;
-    background-color: lightblue;
+.description {
+  @include descColumn();
 }
 
-.buttonContainer{
-    flex: 3;
-    padding: 5px;
+.priorityHeader{
+  @include prioColumn();
+  @include columnHeader();
+}
+
+.priority {
+  @include prioColumn();
+  text-align: center;
+}
+
+.dueDateHeader{
+  @include dueColumn();
+  @include columnHeader();
+}
+
+.dueDate {
+  @include dueColumn();
+  text-align: center;
+}
+
+.buttonHeader{
+  @include actionColumn();
+  @include columnHeader();
+}
+
+.buttonContainer {
+  @include actionColumn();
 }

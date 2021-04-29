@@ -1,0 +1,23 @@
+@import "~office-ui-fabric-react/dist/sass/References.scss";
+
+
+@mixin prioStyles {
+    color: black;
+    padding: 2px;
+    border-radius: 3%;
+}
+
+.highPrio{
+    @include prioStyles();
+    background-color: rgba(255, 152, 152, 0.726);
+}
+
+.medPrio{
+    @include prioStyles();
+    background-color: rgb(255, 242, 128);
+}
+
+.lowPrio{
+    @include prioStyles();
+    background-color: rgb(111, 255, 111);
+}
