@@ -4,6 +4,7 @@ import '@pnp/graph/calendars';
 import '@pnp/graph/users';
 import { observable, action } from 'mobx';
 import { Web } from '@pnp/sp/presets/all';
+import Swal from 'sweetalert2';
 
 class ToDoListStore{
     // A list that can be used by all component
@@ -24,7 +25,11 @@ class ToDoListStore{
               this.list = results;
             }
             else{
-              alert("Failed to retrieve list data. Make sure you have created and selected a ToDo List!");
+              Swal.fire({
+                title: 'Error!',  
+                text: "Failed to retrieve list data. Make sure you have created and selected a ToDo List!",
+                icon: 'error'
+              });
             }
         }), (error: any): void => {
             // An error has occurred while loading the data. Notify the user
@@ -55,8 +60,13 @@ class ToDoListStore{
             DueDate: due,
         }).then(i => {
             console.log(i);
-            alert("Item has been updated!");
-            window.location.reload();
+            Swal.fire({
+                title: "Success", 
+                text: "Item has been updated!", 
+                icon: "success"
+            }).then( () => {
+                window.location.reload()
+            });
         })
     }
 
@@ -73,8 +83,9 @@ class ToDoListStore{
 
         spWeb.lists.getById(listId).items.getById(itemId).delete().then(() =>
         {
-            alert("Task with ID:" + itemId + " has been deleted.")
-            window.location.reload()
+            Swal.fire("Success",  "Task with ID:" + itemId + " has been deleted.", "success").then( () => {
+                window.location.reload()
+            });
         })      
     }
 
@@ -99,7 +110,9 @@ class ToDoListStore{
             }
         }).then((i) => {
             console.log(i)
-            alert("Reminder added to calendar");
+            Swal.fire("Success", "Reminder added to calendar", "success").then( () => {
+                window.location.reload()
+            });
         })
 
         // await graph.me.people().then(i => {
@@ -124,7 +137,7 @@ class ToDoListStore{
 
         if( title === undefined || desc === undefined || prio === undefined || due === undefined)
         {
-            alert("Required fields cannot be empty. Please input all details for new task!");
+            Swal.fire("Error", "Required fields cannot be empty. Please input all details for new task!", "error");
         } else{
             list.items.add({
                 Title: title,
@@ -133,8 +146,9 @@ class ToDoListStore{
                 DueDate: due,
             }).then(i => {
                 console.log(i);
-                alert("New task added to list!");
-                window.location.reload();
+                Swal.fire("Success", "New task added to list!", "success").then( () => {
+                    window.location.reload()
+                });
             })
         }      
     }

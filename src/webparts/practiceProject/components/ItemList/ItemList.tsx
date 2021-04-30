@@ -5,7 +5,12 @@ import store from '../../ToDoListStore';
 import CustomButton from '../CustomButton/CustomButton';
 import PriorityHighlighter from '../PriorityHighlighter/PriorityHighlighter';
 
-function ItemList(props: { webUrl: any, listID: any }) {
+export interface ItemListProps{
+  webUrl?: any,
+  listID?: any
+}
+
+function ItemList(props: ItemListProps ) {
   return useObserver(() => (
     <div>
       <p className={styles.pageHeader}> To Do List </p>

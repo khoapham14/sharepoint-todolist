@@ -9,6 +9,7 @@
     "declaration": true,
     "sourceMap": true,
     "experimentalDecorators": true,
+    "esModuleInterop": true,
     "skipLibCheck": true,
     "outDir": "lib",
     "inlineSources": false,
@@ -20,7 +21,8 @@
     ],
     "types": [
       "es6-promise",
-      "webpack-env"
+      "webpack-env",
+      "jest"
     ],
     "lib": [
       "es5",

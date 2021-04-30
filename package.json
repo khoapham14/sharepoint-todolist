@@ -6,14 +6,36 @@
   "engines": {
     "node": ">=0.10.0"
   },
+  "jest": {
+    "transform": {
+      "^.+\\.[t|j]sx?$": "babel-jest"
+    },
+    "transformIgnorePatterns": [
+      "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.js$",
+      "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.ts$",
+      "/node_modules/(?![@autofiy/autofiyable|@autofiy/property]).+\\.tsx$"
+    ],
+    "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(ts?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json"
+    ],
+    "moduleNameMapper": {
+      "\\.(css|scss)$": "identity-obj-proxy"
+    }
+  },
   "scripts": {
     "build": "gulp bundle",
     "clean": "gulp clean",
-    "test": "gulp test",
+    "test": "jest",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
   "dependencies": {
+    "@babel/preset-env": "^7.14.0",
+    "@babel/preset-typescript": "^7.13.0",
     "@fluentui/react": "^8.11.2",
     "@microsoft/sp-core-library": "1.11.0",
     "@microsoft/sp-lodash-subset": "1.11.0",
@@ -35,12 +57,13 @@
     "react-dom": "16.8.5",
     "sass": "^1.32.12",
     "style-loader": "^2.0.0",
-    "sweetalert2": "^10.16.6",
+    "sweetalert2": "^9.11.0",
     "webpack": "^4.44.2"
   },
   "devDependencies": {
-    "@babel/core": "^7.13.16",
+    "@babel/core": "^7.14.0",
     "@microsoft/rush-stack-compiler-3.3": "0.3.5",
+    "@microsoft/rush-stack-compiler-3.9": "^0.4.45",
     "@microsoft/sp-build-web": "1.11.0",
     "@microsoft/sp-module-interfaces": "1.11.0",
     "@microsoft/sp-tslint-rules": "1.11.0",
@@ -68,6 +91,7 @@
     "react-addons-test-utils": "15.6.2",
     "react-test-renderer": "^16.8.5",
     "sass-loader": "^10.1.1",
-    "ts-jest": "26.5.5"
+    "ts-jest": "26.5.5",
+    "typescript": "^3.9.2"
   }
 }
