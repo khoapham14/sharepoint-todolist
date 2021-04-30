@@ -1,5 +1,8 @@
 import * as React from "react";
-import { observable, action, toJS } from 'mobx';
+import { graph } from '@pnp/graph';
+import '@pnp/graph/calendars';
+import '@pnp/graph/users';
+import { observable, action } from 'mobx';
 import { Web } from '@pnp/sp/presets/all';
 
 class ToDoListStore{
@@ -80,10 +83,28 @@ class ToDoListStore{
      * @param id ID of item to set reminder for
      */
     @action 
-    setReminder = (id: number) => {
+    setReminder = async (title: string, desc: string, due: any) => {
+        await graph.me.calendar.events.add({
+            "subject": title,
+            "body": {
+                "content": desc
+            },
+            "start": {
+                "dateTime": due.toString(),
+                "timeZone": "Pacific/Auckland"
+            },
+            "end": {
+                "dateTime": due.toString(),
+                "timeZone": "Pacific/Auckland"
+            }
+        }).then((i) => {
+            console.log(i)
+            alert("Reminder added to calendar");
+        })
 
-        //TODO: Create calendar event using details of list item.
-        alert("Reminder added to calendar");
+        // await graph.me.people().then(i => {
+        //     console.log(i)
+        // })
     }
 
     /**

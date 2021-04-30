@@ -13,6 +13,7 @@ import { IPracticeProjectProps } from './components/IPracticeProjectProps';
 import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 import { sp, Web, IListEnsureResult, IFieldAddResult, IFieldUpdateResult, IFieldCreationProperties, IItemAddResult } from "@pnp/sp/presets/all";
 import { ToDoListProvider } from './ToDoListContext';
+import { graph } from "@pnp/graph";
 
 
 export interface IPracticeProjectWebPartProps {
@@ -30,8 +31,15 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
 
   public onInit(): Promise<void> {
     this.properties.loading = false;
- 
-    return super.onInit();
+   
+    return super.onInit().then(_ => {
+
+      // other init code may be present
+  
+      graph.setup({
+        spfxContext: this.context
+      });
+    });
   }
 
 

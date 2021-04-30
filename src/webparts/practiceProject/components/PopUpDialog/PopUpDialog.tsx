@@ -147,7 +147,7 @@ function PopUpDialog(props: PopUpDialogProps) {
                 modalProps={modalProps}
                 >
                 <DialogFooter>
-                    <DefaultButton onClick={toggleHideDialog} text="Yes" />
+                    <DefaultButton onClick={() => {store.setReminder(props.itemTitle, props.itemDesc, props.itemDue)}} text="Yes" />
                     <DefaultButton onClick={toggleHideDialog} text="No" />
                 </DialogFooter>
         
@@ -168,6 +168,7 @@ function PopUpDialog(props: PopUpDialogProps) {
                         componentRef={datePickerRef}
                         label="New Due Date"
                         ariaLabel="Select a date. Input format is yyyy-mm-dd"
+                        value={newDueDate}
                         onSelectDate={setNewDate as (date?: Date) => void}
                         formatDate={onFormatDate}
                         className={styles.control}

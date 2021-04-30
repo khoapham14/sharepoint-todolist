@@ -6,6 +6,12 @@
     "version": "1.0.0.0",
     "includeClientSideAssets": true,
     "isDomainIsolated": true,
+    "webApiPermissionRequests": [
+      { "resource": "Microsoft Graph", "scope": "User.ReadBasic.All" },
+      { "resource": "Microsoft Graph", "scope": "Calendars.Read" },
+      { "resource": "Microsoft Graph", "scope": "Tasks.Read" },
+      { "resource": "Microsoft Graph", "scope": "Calendars.Write" }
+    ],
     "developer": {
       "name": "",
       "websiteUrl": "",
