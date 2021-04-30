@@ -1,11 +1,14 @@
-import React from 'react';
-import { configure, mount, ReactWrapper } from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
 import renderer from 'react-test-renderer';
+import ItemList from '../components/ItemList/ItemList';
+import React from 'react';
+
+import { configure, mount, ReactWrapper } from 'enzyme';
+const Adapter = require('enzyme-adapter-react-16')
+
 
 configure({ adapter: new Adapter() });
 
-import ItemList from '../components/ItemList/ItemList';
+
 
 
 it('renders correctly', () => {
