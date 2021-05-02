@@ -30,9 +30,13 @@ function CustomButton(props: CustomButtonProps) {
   //   this.setHideDialog(false)
   // }
 
+  const handleStateChange = (value : boolean) => { 
+    setHideDialog(value)
+  }
+
   return (
     <>
-    <DefaultButton onClick={() => setHideDialog(!hideDialog)}> {props.buttonText} </DefaultButton>
+    <DefaultButton onClick={() => setHideDialog(true)}> {props.buttonText} </DefaultButton>
 
     {/* Show corresponding dialog on button click */}
       {hideDialog ? 
@@ -45,6 +49,8 @@ function CustomButton(props: CustomButtonProps) {
           itemDesc={props.itemDesc}
           itemPrio={props.itemPrio}
           itemDue={props.itemDue}
+          handleStateChange={handleStateChange}
+          dialogState={hideDialog}
         />  
         : ""
       }

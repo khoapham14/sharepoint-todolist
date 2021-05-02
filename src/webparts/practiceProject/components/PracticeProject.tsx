@@ -23,9 +23,6 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
   
   private getListData() : void {
    store.getListData(this.props.list, this.props.webUrl)
-    this.setState({
-      showPlaceholder: false
-    })
   }
 
 
@@ -33,7 +30,8 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
     // load information about terms after the component has been
     // initiated on the page
     if (this.props.list !== null && this.props.list !== "") {  
-      this.getListData();
+      this.getListData()
+      this.setState({ showPlaceholder: false});
     }
   }
 
@@ -71,7 +69,7 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
     }
     else{
       return(   
-         <ItemList listID={this.props.list} webUrl={this.props.webUrl}/>
+        <ItemList listID={this.props.list} webUrl={this.props.webUrl}/>
     );
     }
   }

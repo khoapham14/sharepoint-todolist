@@ -17,7 +17,9 @@ interface PopUpDialogProps{
     itemTitle?: string, 
     itemDesc?: string, 
     itemPrio?: string, 
-    itemDue?: string
+    itemDue?: string,
+    handleStateChange: any,
+    dialogState: boolean,
 }
 
 /**
@@ -27,7 +29,7 @@ interface PopUpDialogProps{
  */
 function PopUpDialog(props: PopUpDialogProps) {
 
-    const [ hideDialog, {toggle :toggleHideDialog} ] = useBoolean(false); //Toggle to show or hide
+    // const [ props.dialogState, {toggle :confirmButtonAction} ] = useBoolean(false); //Toggle to show or hide
 
     const [ newTitle, setNewTitle ] = React.useState(props.itemTitle);
     const [ newDesc, setNewDesc ] = React.useState(props.itemDesc);
@@ -56,7 +58,7 @@ function PopUpDialog(props: PopUpDialogProps) {
     ]
 
 
-    // Date picker
+    // Date picker props
     const styles = mergeStyleSets({
         root: { selectors: { '> *': { marginBottom: 15 } } },
         control: { maxWidth: 300, marginBottom: 15 },
@@ -66,9 +68,12 @@ function PopUpDialog(props: PopUpDialogProps) {
         return !date ? '' : (date.getFullYear()) + '-' +  ('0' + (date.getMonth()+1)).slice(-2) + '-' +('0' + date.getDate()).slice(-2);
     };
 
-    let subText = "";
+    
 
     // Conditionally show subtext based on button title.
+
+    let subText = "";
+
     if(props.title === "Edit"){
         subText = "Input your changes to list item.";
     } else if (props.title === "Delete"){
@@ -79,6 +84,8 @@ function PopUpDialog(props: PopUpDialogProps) {
         subText = "Input details for the new task:"
     }
 
+
+    // Dialog pane props
     const modalPropsStyles = { main: { maxWidth: 700 } };
     const dialogContentProps = {
         type: DialogType.normal,
@@ -91,6 +98,16 @@ function PopUpDialog(props: PopUpDialogProps) {
         styles: modalPropsStyles,
     }
 
+
+    /**
+     * A function to pass into onClick properties for buttons to close dialog and optionally modify data via callback to store functions.
+     * @param callback Takes in a callback function. Intended for store functions to modify data. 
+     */
+    const confirmButtonAction = (callback : any) => {
+        props.handleStateChange(!props.dialogState)
+        callback();
+    }
+
  
 
     // Conditionally show dialog box based on button title.
@@ -98,8 +115,8 @@ function PopUpDialog(props: PopUpDialogProps) {
         case "Edit": 
             return(
                 <Dialog
-                hidden={hideDialog}
-                onDismiss={toggleHideDialog}
+                hidden={!props.dialogState}
+                onDismiss={confirmButtonAction}
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}
                 >
@@ -117,8 +134,8 @@ function PopUpDialog(props: PopUpDialogProps) {
                     <ChoiceGroup  required label="Priority Level" options={options} onChange={setPrio} />
 
                 <DialogFooter>
-                  <DefaultButton onClick={() => store.updateListItem(props.itemID, props.listID, props.webUrl, newTitle, newDesc, newPrio, newDueDate)} text="Submit changes" />
-                  <DefaultButton onClick={toggleHideDialog} text="Cancel" />
+                  <DefaultButton onClick={() => confirmButtonAction(store.updateListItem(props.itemID, props.listID, props.webUrl, newTitle, newDesc, newPrio, newDueDate))} text="Submit changes" />
+                  <DefaultButton onClick={() => confirmButtonAction(()=>{})} text="Cancel" />
                 </DialogFooter>
         
                 </Dialog>
@@ -126,14 +143,14 @@ function PopUpDialog(props: PopUpDialogProps) {
         case "Delete": 
             return(
                 <Dialog
-                hidden={hideDialog}
-                onDismiss={toggleHideDialog}
+                hidden={props.dialogState}
+                onDismiss={confirmButtonAction}
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}
                 >
                 <DialogFooter>
-                    <DefaultButton onClick={() => {store.removeListItem(props.itemID, props.listID, props.webUrl)}} text="Yes" />
-                    <DefaultButton onClick={toggleHideDialog} text="No" />
+                    <DefaultButton onClick={() => confirmButtonAction(store.removeListItem(props.itemID, props.listID, props.webUrl))} text="Yes" />
+                    <DefaultButton onClick={() => confirmButtonAction(()=>{})} text="No" />
                 </DialogFooter>
         
                 </Dialog>
@@ -141,14 +158,14 @@ function PopUpDialog(props: PopUpDialogProps) {
         case "Remind": 
             return(
                 <Dialog
-                hidden={hideDialog}
-                onDismiss={toggleHideDialog}
+                hidden={props.dialogState}
+                onDismiss={confirmButtonAction}
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}
                 >
                 <DialogFooter>
-                    <DefaultButton onClick={() => {store.setReminder(props.itemTitle, props.itemDesc, props.itemDue)}} text="Yes" />
-                    <DefaultButton onClick={toggleHideDialog} text="No" />
+                    <DefaultButton onClick={() => confirmButtonAction(store.setReminder(props.itemTitle, props.itemDesc, props.itemDue))} text="Yes" />
+                    <DefaultButton onClick={() => confirmButtonAction(()=>{})} text="No" />
                 </DialogFooter>
         
                 </Dialog>
@@ -156,8 +173,8 @@ function PopUpDialog(props: PopUpDialogProps) {
         case "Add new task":
             return(
                 <Dialog
-                hidden={hideDialog}
-                onDismiss={toggleHideDialog}
+                hidden={props.dialogState}
+                onDismiss={confirmButtonAction}
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}
                 >
@@ -176,8 +193,8 @@ function PopUpDialog(props: PopUpDialogProps) {
                     <ChoiceGroup  required label="Priority Level" options={options} onChange={setPrio} />
             
                 <DialogFooter>
-                    <DefaultButton onClick={() => store.addNewTask(props.listID, props.webUrl, newTitle, newDesc, newPrio, newDueDate)} text="Add task" />
-                    <DefaultButton onClick={toggleHideDialog} text="Cancel" />
+                    <DefaultButton onClick={() => confirmButtonAction(store.addNewTask(props.listID, props.webUrl, newTitle, newDesc, newPrio, newDueDate))} text="Add task" />
+                    <DefaultButton onClick={() => confirmButtonAction(()=>{})} text="Cancel" />
                 </DialogFooter>
         
                 </Dialog>
