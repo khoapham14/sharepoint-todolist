@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 
 class ToDoListStore{
     // A list that can be used by all component
-    @observable list: any[] = []
+    @observable list: any[] = [];
 
     /**
      * Fetch data from a Sharepoint List and add to this list array.
@@ -17,8 +17,8 @@ class ToDoListStore{
      */
     @action 
     getListData = ( listId: any, webUrl: any) =>{
-        let spWeb = Web(webUrl)
-        let toDoList = spWeb.lists.getById(listId)
+        let spWeb = Web(webUrl);
+        let toDoList = spWeb.lists.getById(listId);
 
         toDoList.items.select("ID", "Title", "Description", "Priority", "DueDate").get().then((results : any[]) => {
             if(results !== null){
@@ -34,8 +34,8 @@ class ToDoListStore{
         }), (error: any): void => {
             // An error has occurred while loading the data. Notify the user
             // that loading data is finished and return the error message.
-            console.log(error)
-        }
+            console.log(error);
+        };
     }
 
     /**
@@ -51,7 +51,7 @@ class ToDoListStore{
     @action
     updateListItem = (itemId: number, listId: any, webUrl: any, title?: string, desc?: string, prio?: string, due?: any) => {
         let spWeb = Web(webUrl);
-        let list = spWeb.lists.getById(listId)
+        let list = spWeb.lists.getById(listId);
 
         list.items.getById(itemId).update({
             Title: title,
@@ -65,9 +65,9 @@ class ToDoListStore{
                 text: "Item has been updated!", 
                 icon: "success"
             }).then( () => {
-                window.location.reload()
+                window.location.reload();
             });
-        })
+        });
     }
 
 
@@ -79,14 +79,14 @@ class ToDoListStore{
      */
     @action
     removeListItem = (itemId: number, listId: any, webUrl: any) => {
-        let spWeb = Web(webUrl)
+        let spWeb = Web(webUrl);
 
         spWeb.lists.getById(listId).items.getById(itemId).delete().then(() =>
         {
             Swal.fire("Success",  "Task with ID:" + itemId + " has been deleted.", "success").then( () => {
-                window.location.reload()
+                window.location.reload();
             });
-        })      
+        });      
     }
 
     /**
@@ -109,11 +109,11 @@ class ToDoListStore{
                 "timeZone": "Pacific/Auckland"
             }
         }).then((i) => {
-            console.log(i)
+            console.log(i);
             Swal.fire("Success", "Reminder added to calendar", "success").then( () => {
-                window.location.reload()
+                window.location.reload();
             });
-        })
+        });
 
         // await graph.me.people().then(i => {
         //     console.log(i)
@@ -133,7 +133,7 @@ class ToDoListStore{
     addNewTask = (listId: any, webUrl: any, title: string, desc: string, prio: string, due: any) => {
 
         let spWeb = Web(webUrl);
-        let list = spWeb.lists.getById(listId)
+        let list = spWeb.lists.getById(listId);
 
         if( title === undefined || desc === undefined || prio === undefined || due === undefined)
         {
@@ -147,9 +147,9 @@ class ToDoListStore{
             }).then(i => {
                 console.log(i);
                 Swal.fire("Success", "New task added to list!", "success").then( () => {
-                    window.location.reload()
+                    window.location.reload();
                 });
-            })
+            });
         }      
     }
 }

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly 1`] = `
+exports[`Base Item list renders correctly 1`] = `
 <div>
   <p>
      To Do List 
@@ -46,5 +46,39 @@ exports[`renders correctly 1`] = `
     </div>
   </div>
   
+</div>
+`;
+
+exports[`Base button renders correctly 1`] = `
+Array [
+  <button
+    className="ms-Button ms-Button--default root-85"
+    data-is-focusable={true}
+    onClick={[Function]}
+    onKeyDown={[Function]}
+    onKeyPress={[Function]}
+    onKeyUp={[Function]}
+    onMouseDown={[Function]}
+    onMouseUp={[Function]}
+    type="button"
+  >
+    <span
+      className="ms-Button-flexContainer flexContainer-86"
+      data-automationid="splitbuttonprimary"
+    >
+       
+      Edit
+       
+    </span>
+  </button>,
+  "",
+]
+`;
+
+exports[`Pop up dialog renders correctly 1`] = `null`;
+
+exports[`Priority Highlighter renders correctly 1`] = `
+<div>
+  High
 </div>
 `;

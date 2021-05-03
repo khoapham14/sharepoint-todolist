@@ -1,19 +1,15 @@
 import * as React from 'react';
 import * as ReactDom from 'react-dom';
 import { Version } from '@microsoft/sp-core-library';
-import {
-  IPropertyPaneConfiguration,
-  PropertyPaneTextField
-} from '@microsoft/sp-property-pane';
+import { IPropertyPaneConfiguration } from '@microsoft/sp-property-pane';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
-
 import * as strings from 'PracticeProjectWebPartStrings';
 import PracticeProject from './components/PracticeProject';
 import { IPracticeProjectProps } from './components/IPracticeProjectProps';
 import { PropertyFieldListPicker, PropertyFieldListPickerOrderBy } from '@pnp/spfx-property-controls/lib/PropertyFieldListPicker';
 import { PropertyFieldButtonWithCallout } from '@pnp/spfx-property-controls/lib/PropertyFieldButtonWithCallout';
 import { CalloutTriggers } from '@pnp/spfx-property-controls/lib/Callout';
-import { sp, Web, IListEnsureResult, IFieldAddResult, IFieldUpdateResult, IFieldCreationProperties, IItemAddResult } from "@pnp/sp/presets/all";
+import { Web, IListEnsureResult } from "@pnp/sp/presets/all";
 import { ToDoListProvider } from './ToDoListContext';
 import { ChoiceFieldFormatType, DateTimeFieldFormatType, CalendarType, DateTimeFieldFriendlyFormatType } from "@pnp/sp/fields/types";
 import { graph } from "@pnp/graph";
@@ -23,10 +19,6 @@ export interface IPracticeProjectWebPartProps {
   title: string;
   list: string;
   loading: boolean;
-  // taskName: string;
-  // taskDescription: string;
-  // taskStakeholder: string;
-  // taskDueDate: string;
 }
 
 
@@ -75,6 +67,11 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
     return Version.parse('1.0');
   }
 
+  /**
+   * Property pane configuration with a list picker to choose a To Do list 
+   * and a button to create a sample list.
+   * @returns PropertyPane
+   */
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
     return {
       showLoadingIndicator: this.properties.loading,
@@ -103,7 +100,7 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
                 PropertyFieldButtonWithCallout('createListButton', {
                   calloutTrigger: CalloutTriggers.Click,
                   key: 'buttonWithCalloutFieldId',
-                  calloutContent: React.createElement('p', {}, "Creates a sample To Do list with the required fields. You can change the list / column names in SharePoint later."),
+                  calloutContent: React.createElement('p', {}, "Creates a sample To Do list with the required fields."),
                   calloutWidth: 150,
                   text: "Create Sample List",
                   onClick: this.createToDoList.bind(this),
@@ -117,6 +114,11 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
     };
   }
 
+
+  /**
+   * Create a ToDo list with current date as ID on current site. 
+   * Calls addToDoFields to add the required fields into list.
+   */
   private async createToDoList(): Promise<void> {
     this.properties.loading = true;
     this.context.propertyPane.refresh();
@@ -150,9 +152,14 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
     });
   }
 
+
+  /**
+   * Add the required fields to a Sharepoint Todo List & create a sample row.
+   * @param listEnsureResult Takes Sharepoint list that exists.
+   */
   private addToDoListFields = async (listEnsureResult: IListEnsureResult): Promise<void> => {
     try {
-      const prioChoices = [`High`, `Med`, `Low`]
+      const prioChoices = [`High`, `Med`, `Low`];
 
       await listEnsureResult.list.fields.getByInternalNameOrTitle("Title");
       await listEnsureResult.list.fields.addMultilineText("Description", 10, true, false, false, true, {
@@ -163,14 +170,14 @@ export default class PracticeProjectWebPart extends BaseClientSideWebPart<IPract
         Required: true
       });
 
-      await listEnsureResult.list.fields.addChoice("Priority", prioChoices, ChoiceFieldFormatType.Dropdown, false)
-      await listEnsureResult.list.fields.addDateTime("DueDate", DateTimeFieldFormatType.DateOnly, CalendarType.Gregorian, DateTimeFieldFriendlyFormatType.Disabled)
+      await listEnsureResult.list.fields.addChoice("Priority", prioChoices, ChoiceFieldFormatType.Dropdown, false);
+      await listEnsureResult.list.fields.addDateTime("DueDate", DateTimeFieldFormatType.DateOnly, CalendarType.Gregorian, DateTimeFieldFriendlyFormatType.Disabled);
       await listEnsureResult.list.items.add({
         "Title": "A new task",
         "Description": "This is the description of my task",
         "Priority": "High",
         "DueDate": "2021-01-01"
-      })
+      });
 
     } catch (e) {
       throw e;

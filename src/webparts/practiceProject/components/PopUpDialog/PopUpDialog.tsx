@@ -5,22 +5,22 @@ import store from '../../ToDoListStore';
 import { Dialog, DialogType, DialogFooter, 
         DefaultButton, TextField, DatePicker, 
         IDatePicker, mergeStyleSets,
-        ChoiceGroup, IChoiceGroupOption } from '@fluentui/react'
+        ChoiceGroup, IChoiceGroupOption } from '@fluentui/react';
 import { useBoolean } from '@fluentui/react-hooks';
 
 
 interface PopUpDialogProps{
-    title: string, 
-    listID: any, 
-    webUrl: any, 
-    itemID?: number, 
-    itemTitle?: string, 
-    itemDesc?: string, 
-    itemPrio?: string, 
-    itemDue?: string,
-    handleStateChange: any,
-    dialogState: boolean,
-}
+    title: string;
+    listID: any;
+    webUrl: any; 
+    itemID?: number; 
+    itemTitle?: string; 
+    itemDesc?: string; 
+    itemPrio?: string; 
+    itemDue?: string;
+    handleStateChange?: any;
+    dialogState?: boolean;
+};
 
 /**
  * A UI component that conditionally renders Fluent UI Dialog boxes based on which button was pressed.
@@ -38,11 +38,11 @@ function PopUpDialog(props: PopUpDialogProps) {
     const datePickerRef = React.useRef<IDatePicker>(null);
 
     const setTitle = (e: any) => {
-        setNewTitle(e.target.value)
+        setNewTitle(e.target.value);
     }
 
     const setDesc = (e: any) => {
-        setNewDesc(e.target.value)
+        setNewDesc(e.target.value);
     }
 
    
@@ -55,7 +55,7 @@ function PopUpDialog(props: PopUpDialogProps) {
         { key: 'High', text: 'High' },
         { key: 'Med', text: 'Med' },
         { key: 'Low', text: 'Low' }
-    ]
+    ];
 
 
     // Date picker props
@@ -80,9 +80,9 @@ function PopUpDialog(props: PopUpDialogProps) {
         subText = "Are you sure you wish to delete this item?";
     } else if (props.title === "Remind"){
         subText = "Would you like to set reminder for this item?";
-    } else if (props.title === "Add new task"){
+    } else if (props.title === "Add task"){
         subText = "Input details for the new task:"
-    }
+    };
 
 
     // Dialog pane props
@@ -96,7 +96,7 @@ function PopUpDialog(props: PopUpDialogProps) {
     const modalProps = {
         isBlocking: true,
         styles: modalPropsStyles,
-    }
+    };
 
 
     /**
@@ -104,9 +104,9 @@ function PopUpDialog(props: PopUpDialogProps) {
      * @param callback Takes in a callback function. Intended for store functions to modify data. 
      */
     const confirmButtonAction = (callback : any) => {
-        props.handleStateChange(!props.dialogState)
+        props.handleStateChange(!props.dialogState);
         callback();
-    }
+    };
 
  
 
@@ -170,7 +170,7 @@ function PopUpDialog(props: PopUpDialogProps) {
         
                 </Dialog>
             );
-        case "Add new task":
+        case "Add task":
             return(
                 <Dialog
                 hidden={!props.dialogState}

@@ -1,16 +1,25 @@
 @import "~office-ui-fabric-react/dist/sass/References.scss";
 
-$lightTheme: rgb(221, 221, 221);
+* {
+  font-size: 16px;
+
+  @media only screen and (max-width: 700px) {
+    font-size: 14px;
+  }
+  @media only screen and (max-width: 700px) {
+    font-size: 12px;
+  }
+}
 
 @mixin titleColumn {
   display: flex;
   flex: 2;
   padding: 5px;
+  width: 10%;
   flex-flow: column nowrap;
   border-bottom: 1px solid black;
   @media only screen and (max-width: 700px) {
     padding: none;
-    border: none;
     margin: 0px;
   }
 }
@@ -19,12 +28,11 @@ $lightTheme: rgb(221, 221, 221);
   display: flex;
   flex: 6;
   flex-flow: column nowrap;
+  width: 60%;
   padding: 5px;
-  background-color: $lightTheme;
   border-bottom: 1px solid black;
   @media only screen and (max-width: 700px) {
     padding: none;
-    border: none;
     margin: 0px;
   }
 }
@@ -32,12 +40,12 @@ $lightTheme: rgb(221, 221, 221);
 @mixin prioColumn{
   display: flex;
   flex: 2;
+  width: 10%;
   flex-flow: column nowrap;
   padding: 5px;
   border-bottom: 1px solid black;
   @media only screen and (max-width: 700px) {
     padding: none;
-    border: none;
     margin: 0px;
   }
 }
@@ -47,11 +55,10 @@ $lightTheme: rgb(221, 221, 221);
   flex-flow: column nowrap;
   flex: 2;
   padding: 5px;
-  background-color: $lightTheme;
+  width: 10%;
   border-bottom: 1px solid black;
   @media only screen and (max-width: 700px) {
     padding: none;
-    border: none;
     margin: 0px;
   }
 }
@@ -61,18 +68,19 @@ $lightTheme: rgb(221, 221, 221);
   flex-flow: column nowrap;
   flex: 2;
   padding: 5px;
+  width: 10%;
   border-bottom: 1px solid black;
   @media only screen and (max-width: 700px) {
     padding: none;
-    border: none;
     margin: 0px;
   }
 }
 
 @mixin columnHeader{
   font-weight: bold;
+  color: white;
+  background-color: black;
   text-align: center;
-  border-bottom: 1px solid black;
 }
 
 .pageHeader {
@@ -90,9 +98,17 @@ $lightTheme: rgb(221, 221, 221);
   width: 100%;
 }
 
+.flexContainer:nth-child(even){
+  background-color: $ms-color-white;
+}
+.flexContainer:nth-child(odd){
+  background-color: $ms-color-neutralLighter;
+}
+
 .addButton{
   float: right;
   margin-bottom: 10px;
+  min-width: 2em!important;
 }
 
 
@@ -142,3 +158,5 @@ $lightTheme: rgb(221, 221, 221);
 .buttonContainer {
   @include actionColumn();
 }
+
+

@@ -23,20 +23,17 @@ interface CustomButtonProps{
 function CustomButton(props: CustomButtonProps) {
 
   //State to show/hide dialog. 
-  //TODO: Fix the double-click to get intended behaviour. (Ideas: MobX, callback() to change state from PopUp)
   const [ hideDialog, setHideDialog ] = React.useState(false);
 
-  // function toggleHide(){
-  //   this.setHideDialog(false)
-  // }
 
+  // Function to pass as props to Dialog for toggling this.state.hideDialog.
   const handleStateChange = (value : boolean) => { 
-    setHideDialog(value)
+    setHideDialog(value);
   }
 
   return (
     <>
-    <DefaultButton onClick={() => setHideDialog(true)}> {props.buttonText} </DefaultButton>
+    <DefaultButton className={styles.customButton} onClick={() => setHideDialog(true)}> {props.buttonText} </DefaultButton>
 
     {/* Show corresponding dialog on button click */}
       {hideDialog ? 
