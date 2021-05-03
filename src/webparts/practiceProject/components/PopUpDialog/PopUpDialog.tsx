@@ -143,7 +143,7 @@ function PopUpDialog(props: PopUpDialogProps) {
         case "Delete": 
             return(
                 <Dialog
-                hidden={props.dialogState}
+                hidden={!props.dialogState}
                 onDismiss={confirmButtonAction}
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}
@@ -158,7 +158,7 @@ function PopUpDialog(props: PopUpDialogProps) {
         case "Remind": 
             return(
                 <Dialog
-                hidden={props.dialogState}
+                hidden={!props.dialogState}
                 onDismiss={confirmButtonAction}
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}
@@ -173,7 +173,7 @@ function PopUpDialog(props: PopUpDialogProps) {
         case "Add new task":
             return(
                 <Dialog
-                hidden={props.dialogState}
+                hidden={!props.dialogState}
                 onDismiss={confirmButtonAction}
                 dialogContentProps={dialogContentProps}
                 modalProps={modalProps}

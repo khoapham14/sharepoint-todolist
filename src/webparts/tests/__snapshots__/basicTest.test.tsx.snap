@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <p>
+     To Do List 
+  </p>
+  <div>
+    <button
+      className="ms-Button ms-Button--default root-85"
+      data-is-focusable={true}
+      onClick={[Function]}
+      onKeyDown={[Function]}
+      onKeyPress={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseUp={[Function]}
+      type="button"
+    >
+      <span
+        className="ms-Button-flexContainer flexContainer-86"
+        data-automationid="splitbuttonprimary"
+      >
+         
+        Add new task
+         
+      </span>
+    </button>
+    
+  </div>
+  <div>
+    <div>
+        Task 
+    </div>
+    <div>
+        Task Description 
+    </div>
+    <div>
+       Priority 
+    </div>
+    <div>
+        Due Date 
+    </div>
+    <div>
+       Actions 
+    </div>
+  </div>
+  
+</div>
+`;

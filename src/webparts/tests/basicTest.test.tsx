@@ -1,5 +1,5 @@
 import renderer from 'react-test-renderer';
-import ItemList from '../components/ItemList/ItemList';
+import ItemList from '../practiceProject/components/ItemList/ItemList';
 import React from 'react';
 
 import { configure, mount, ReactWrapper } from 'enzyme';
@@ -11,7 +11,7 @@ configure({ adapter: new Adapter() });
 
 
 
-it('renders correctly', () => {
+it('Base Item list renders correctly', () => {
     const tree = renderer
       .create(<ItemList />)
       .toJSON();
