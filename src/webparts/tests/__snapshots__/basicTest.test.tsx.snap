@@ -22,7 +22,7 @@ exports[`Base Item list renders correctly 1`] = `
         data-automationid="splitbuttonprimary"
       >
          
-        Add new task
+        Add task
          
       </span>
     </button>

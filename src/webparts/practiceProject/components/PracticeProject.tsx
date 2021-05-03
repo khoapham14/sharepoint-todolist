@@ -7,7 +7,7 @@ import ItemList from '../components/ItemList/ItemList';
 
 
 interface IPracticeProjectState {
-  showPlaceholder: boolean,
+  showPlaceholder: boolean;
 }
 
 
@@ -17,10 +17,15 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
 
     this.state = {
       showPlaceholder: true,
-    }
+    };
   }
 
 
+  /**
+   * Use store action to get a Sharepoint list data. Takes a callback to set state 
+   * to avoid race condition issues.
+   * @param callback A callback function to set state of showPlaceholder.
+   */
   private getListData(callback: Function): void {
     if (this.props.list === null || this.props.list === "") {
       this.setState({
@@ -38,14 +43,18 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
     // load information about terms after the component has been
     // initiated on the page
     if (this.props.list !== null && this.props.list !== "") {
-      this.getListData(() => { this.setState({ showPlaceholder: false })});
+      this.getListData(() => {
+        this.setState({ showPlaceholder: false });
+      });
     }
   }
 
-  public componentDidUpdate(prevProps: IPracticeProjectProps, prevState: IPracticeProjectState) {
+  public componentDidUpdate(prevProps: IPracticeProjectProps) {
     if (this.props.list !== prevProps.list) {
       if (this.props.list !== null && this.props.list !== "") {
-        this.getListData(() => { this.setState({ showPlaceholder: false }) })
+        this.getListData(() => {
+          this.setState({ showPlaceholder: false });
+        });
       } else {
         this.setState({
           showPlaceholder: true

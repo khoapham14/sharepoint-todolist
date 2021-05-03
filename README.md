@@ -2,9 +2,10 @@
 
 ## Summary
 
-Short summary on functionality and used technologies.
+Simple todo list displayed as a table. Fetches a Sharepoint list and allow for CRUD operations via Graph API.
 
-[picture of the solution in action, if possible]
+Technologies used: pnpJS, MobX, Storybook, Jest, FluentUI.
+
 
 ## Used SharePoint Framework Version
 
@@ -19,20 +20,19 @@ Short summary on functionality and used technologies.
 
 ## Prerequisites
 
-> Any special pre-requisites?
+> Node v10.14.2
 
 ## Solution
 
 Solution|Author(s)
 --------|---------
-folder name | Author details (name, company, twitter alias with link)
+sharepoint-todolist | Khoa Pham (github.com/asianlanlord)
 
 ## Version history
 
 Version|Date|Comments
 -------|----|--------
-1.1|March 10, 2021|Update comment
-1.0|January 29, 2021|Initial release
+1.0|May 4, 2021|Initial release
 
 ## Disclaimer
 
@@ -48,21 +48,16 @@ Version|Date|Comments
   - **npm install**
   - **gulp serve**
 
-> Include any additional steps as needed.
+- For testing and using other tools, follow instructions from references. 
 
 ## Features
 
-Description of the extension that expands upon high-level summary above.
-
 This extension illustrates the following concepts:
 
-- topic 1
-- topic 2
-- topic 3
+- CRUD operations on a Sharepoint List using Graph API
+- Interaction with another MS service (in this case Calendar) from Sharepoint.
+- Basic implementation of FluentUI, Jest, MobX and Storybook in a Sharepoint project.
 
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
-
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
 
 ## References
 
@@ -71,3 +66,7 @@ This extension illustrates the following concepts:
 - [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
 - [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
 - [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
+- [Storybook documentation] (https://storybook.js.org/docs/react/get-started/introduction) - For the basics of using Storybook for UI testing.
+- [Using Jest with Sharepoint guide] - (https://www.voitanos.io/blog/enable-jest-testing-of-sharepoint-framework-projects-in-one-simple-step) - For configuring Jest to work on Sharepoint.
+- [MobX documentation] (https://mobx.js.org/README.html) - For the basics of using MobX to manage state.
+- [Fluent UI] (https://developer.microsoft.com/en-us/fluentui#/controls/web) - Microsoft FluentUI documentation.

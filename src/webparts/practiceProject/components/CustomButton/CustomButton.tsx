@@ -4,14 +4,14 @@ import { DefaultButton } from '@fluentui/react';
 import PopUpDialog from '../PopUpDialog/PopUpDialog';
 
 interface CustomButtonProps{
-  buttonText: string, 
-  listID: any, 
-  webUrl: any, 
-  itemID?: number, 
-  itemTitle?: string, 
-  itemDesc?: string, 
-  itemPrio?: string, 
-  itemDue?: string
+  buttonText: string;
+  listID: any;
+  webUrl: any; 
+  itemID?: number; 
+  itemTitle?: string; 
+  itemDesc?: string;
+  itemPrio?: string; 
+  itemDue?: string;
 }
 
 
@@ -29,7 +29,7 @@ function CustomButton(props: CustomButtonProps) {
   // Function to pass as props to Dialog for toggling this.state.hideDialog.
   const handleStateChange = (value : boolean) => { 
     setHideDialog(value);
-  }
+  };
 
   return (
     <>

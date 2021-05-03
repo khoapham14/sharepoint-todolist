@@ -17,19 +17,19 @@ function PriorityHighlighter(props: { priority: string}) {
                 <div className={styles.highPrio}>
                     {props.priority}
                 </div>
-        )
+            );
         case "Med":
             return(
                 <div className={styles.medPrio}>
                     {props.priority}
                 </div>
-        )
+            );
         case "Low":
             return(
                 <div className={styles.lowPrio}>
                     {props.priority}
                 </div>
-        )
+            );
         default:
             break;
     }

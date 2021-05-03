@@ -1,12 +1,10 @@
 import * as React from 'react';
-import styles from './PopUpDialog.module.scss';
 import store from '../../ToDoListStore';
 
 import { Dialog, DialogType, DialogFooter, 
         DefaultButton, TextField, DatePicker, 
         IDatePicker, mergeStyleSets,
         ChoiceGroup, IChoiceGroupOption } from '@fluentui/react';
-import { useBoolean } from '@fluentui/react-hooks';
 
 
 interface PopUpDialogProps{
@@ -20,7 +18,7 @@ interface PopUpDialogProps{
     itemDue?: string;
     handleStateChange?: any;
     dialogState?: boolean;
-};
+}
 
 /**
  * A UI component that conditionally renders Fluent UI Dialog boxes based on which button was pressed.
@@ -39,11 +37,11 @@ function PopUpDialog(props: PopUpDialogProps) {
 
     const setTitle = (e: any) => {
         setNewTitle(e.target.value);
-    }
+    };
 
     const setDesc = (e: any) => {
         setNewDesc(e.target.value);
-    }
+    };
 
    
     // Choice group 
@@ -81,8 +79,8 @@ function PopUpDialog(props: PopUpDialogProps) {
     } else if (props.title === "Remind"){
         subText = "Would you like to set reminder for this item?";
     } else if (props.title === "Add task"){
-        subText = "Input details for the new task:"
-    };
+        subText = "Input details for the new task:";
+    }
 
 
     // Dialog pane props

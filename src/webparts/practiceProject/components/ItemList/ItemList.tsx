@@ -6,8 +6,8 @@ import CustomButton from '../CustomButton/CustomButton';
 import PriorityHighlighter from '../PriorityHighlighter/PriorityHighlighter';
 
 export interface ItemListProps {
-  webUrl?: any,
-  listID?: any
+  webUrl?: any;
+  listID?: any;
 }
 
 function ItemList(props: ItemListProps) {
@@ -51,7 +51,7 @@ function ItemList(props: ItemListProps) {
                 itemID={listItems.ID}
                 itemTitle={listItems.Title}
                 itemDesc={listItems.Description}
-                itemDue={listItems.DueDate.slice(0, 10)}
+                itemDue={listItems.DueDate.slice(0, 10)}   
                 itemPrio={listItems.Priority}
               />
 

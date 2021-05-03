@@ -24,18 +24,14 @@ class ToDoListStore{
             if(results !== null){
               this.list = results;
             }
-            else{
-              Swal.fire({
+        }).catch((error : any) => {
+            Swal.fire({
                 title: 'Error!',  
-                text: "Failed to retrieve list data. Make sure you have created and selected a ToDo List!",
+                text: "Failed to retrieve list data. Make sure you have selected a To Do List!",
                 icon: 'error'
-              });
-            }
-        }), (error: any): void => {
-            // An error has occurred while loading the data. Notify the user
-            // that loading data is finished and return the error message.
-            console.log(error);
-        };
+            });
+            this.list = [];       
+        })
     }
 
     /**

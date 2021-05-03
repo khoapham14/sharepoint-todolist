@@ -6,7 +6,7 @@ import PriorityHighlighter from '../practiceProject/components/PriorityHighlight
 import React from 'react';
 
 import { configure, mount, ReactWrapper } from 'enzyme';
-const Adapter = require('enzyme-adapter-react-16')
+const Adapter = require('enzyme-adapter-react-16');
 
 
 configure({ adapter: new Adapter() });
@@ -25,19 +25,19 @@ it('Base button renders correctly', () => {
       .create(<CustomButton buttonText="Edit" listID="" webUrl="" />)
       .toJSON();
     expect(tree).toMatchSnapshot();
-})
+});
 
 it('Pop up dialog renders correctly', () => {
   const tree = renderer
       .create(<PopUpDialog title="Edit" listID="" webUrl="" handleStateChange="" />)
       .toJSON();
     expect(tree).toMatchSnapshot();
-})
+});
 
 it('Priority Highlighter renders correctly', () => {
   const tree = renderer
       .create(<PriorityHighlighter priority="High" />)
       .toJSON();
     expect(tree).toMatchSnapshot();
-})
+});
 

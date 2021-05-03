@@ -4,7 +4,7 @@ import store from './ToDoListStore';
 
 type ToDoListContextValue = {
     todoStore: typeof store;
-}
+};
 
 const ToDoContext = React.createContext<ToDoListContextValue>({} as ToDoListContextValue);
 
@@ -16,7 +16,7 @@ export const ToDoListProvider: React.FC<React.PropsWithChildren<{}>> = ({ childr
     return (<ToDoContext.Provider value={{ todoStore }}>
         {children}
     </ToDoContext.Provider>);
-}
+};
 
 export const useTodoStore = () => React.useContext(ToDoContext);
 

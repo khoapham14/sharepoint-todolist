@@ -36,10 +36,13 @@
   ],
   "exclude": [
     "node_modules",
+    "tests",
     "lib", 
     "src/stories",
     "node_modules",
     "./node_modules",
     "./node_modules/*",
+    "src/**/*.css.ts",
+    "src/**/*.scss.ts",
   ]
 }
