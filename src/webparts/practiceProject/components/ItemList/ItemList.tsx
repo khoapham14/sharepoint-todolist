@@ -12,8 +12,8 @@ export interface ItemListProps {
 
 function ItemList(props: ItemListProps) {
   return useObserver(() => (
-    <div>
-      <p className={styles.pageHeader}> To Do List </p>
+    <div id="itemList">
+      <p className={styles.pageHeader}>To Do List</p>
 
       <div className={styles.addButton}>
         <CustomButton buttonText={"Add task"} listID={props.listID} webUrl={props.webUrl} />

@@ -1,5 +1,4 @@
 import * as React from 'react';
-import styles from './PracticeProject.module.scss';
 import { IPracticeProjectProps } from './IPracticeProjectProps';
 import { Placeholder } from '@pnp/spfx-controls-react/lib/Placeholder';
 import store from '../ToDoListStore';
@@ -37,7 +36,6 @@ export default class PracticeProject extends React.Component<IPracticeProjectPro
     }
 
   }
-
 
   public componentDidMount(): void {
     // load information about terms after the component has been

@@ -1,4 +1,3 @@
-import * as React from "react";
 import { graph } from '@pnp/graph';
 import '@pnp/graph/calendars';
 import '@pnp/graph/users';
@@ -14,15 +13,17 @@ class ToDoListStore{
      * Fetch data from a Sharepoint List and add to this list array.
      * @param listId SharePoint list ID
      * @param webUrl SharePoint site URL
+     * @returns Length of retrieved list for testing purposes.
      */
     @action 
-    getListData = ( listId: any, webUrl: any) =>{
+    getListData = ( listId: any, webUrl: any): any  => {
         let spWeb = Web(webUrl);
         let toDoList = spWeb.lists.getById(listId);
 
         toDoList.items.select("ID", "Title", "Description", "Priority", "DueDate").get().then((results : any[]) => {
             if(results !== null){
-              this.list = results;
+              this.list = results;   
+              return results;  
             }
         }).catch((error : any) => {
             Swal.fire({

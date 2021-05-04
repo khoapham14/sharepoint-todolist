@@ -7,7 +7,7 @@ import { Dialog, DialogType, DialogFooter,
         ChoiceGroup, IChoiceGroupOption } from '@fluentui/react';
 
 
-interface PopUpDialogProps{
+export interface PopUpDialogProps{
     title: string;
     listID: any;
     webUrl: any; 
@@ -112,6 +112,7 @@ function PopUpDialog(props: PopUpDialogProps) {
     switch(props.title){
         case "Edit": 
             return(
+                <div id="popUpDialog">
                 <Dialog
                 hidden={!props.dialogState}
                 onDismiss={confirmButtonAction}
@@ -137,9 +138,11 @@ function PopUpDialog(props: PopUpDialogProps) {
                 </DialogFooter>
         
                 </Dialog>
+                </div>
             );
         case "Delete": 
             return(
+                <div id="popUpDialog">
                 <Dialog
                 hidden={!props.dialogState}
                 onDismiss={confirmButtonAction}
@@ -152,9 +155,11 @@ function PopUpDialog(props: PopUpDialogProps) {
                 </DialogFooter>
         
                 </Dialog>
+                </div>
             );
         case "Remind": 
             return(
+                <div id="popUpDialog">
                 <Dialog
                 hidden={!props.dialogState}
                 onDismiss={confirmButtonAction}
@@ -167,9 +172,11 @@ function PopUpDialog(props: PopUpDialogProps) {
                 </DialogFooter>
         
                 </Dialog>
+                </div>
             );
         case "Add task":
             return(
+                <div id="popUpDialog">
                 <Dialog
                 hidden={!props.dialogState}
                 onDismiss={confirmButtonAction}
@@ -196,6 +203,7 @@ function PopUpDialog(props: PopUpDialogProps) {
                 </DialogFooter>
         
                 </Dialog>
+                </div>
             );
         default:
             break;
