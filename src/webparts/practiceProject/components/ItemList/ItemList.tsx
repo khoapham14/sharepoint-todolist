@@ -12,7 +12,7 @@ export interface ItemListProps {
 
 function ItemList(props: ItemListProps) {
   return useObserver(() => (
-    <div id="itemList">
+    <div id="itemList" className={styles.itemList}>
       <p className={styles.pageHeader}>To Do List</p>
 
       <div className={styles.addButton}>

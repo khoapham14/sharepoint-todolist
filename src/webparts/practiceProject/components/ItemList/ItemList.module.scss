@@ -11,6 +11,11 @@
   }
 }
 
+.itemList{
+  height: fit-content;
+  min-height: 50vh;
+}
+
 @mixin titleColumn {
   display: flex;
   flex: 2;

@@ -18,7 +18,7 @@ Edit.args = {
 
 export const Add = Template.bind({});
 Add.args = { 
-    title: "Add new task",
+    title: "Add task",
     listID: "",
     webUrl: "",
     dialogState: true,
